@@ -47,13 +47,14 @@ function create_article_table(article_list) {
                 orderable: false
             },
             { title: "Tên bài", data: "title", "searchable": true, className: "all" },
+            { title: "Link", data: "href", "searchable": false, className: "all" },
             { title: "Nguồn báo", data: "newspaper", "searchable": false, className: "min-desktop" },
             { title: "Chủ đề", data: "category", "searchable": false, className: "min-desktop" },
             { title: "Sắc thái", data: "sentimentality", "searchable": false, className: "min-desktop" }
         ],
         "rowCallback": function (row, data, index) {
-            topic = $('td:eq(0)', row).html();
-            $('td:eq(0)', row).html('<a href="' + data.href + '" target="_blank">' + topic + '</a>');
+            topic = $('td:eq(2)', row).html();
+            $('td:eq(2)', row).html('<a href="' + data.href + '" target="_blank">' + topic + '</a>');
             // sentimentality = $('td:eq(6)', row).html();
             // $('td:eq(6)', row).html('<select value="' + data.quality + '"> <option value="positive"> Tích cực </option> <option value="negative"> Tiêu cực </option> <option value="neutral"> Trung tính </option></select>');
         },

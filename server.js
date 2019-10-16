@@ -32,6 +32,7 @@ app.get('/data', async (req, res) => {
             row = {};
             row['DT_RowId'] = article.id;
             row['title'] = article.title;
+            row['href'] = article.href;
             row['newspaper'] = article.newspaper;
             row['category'] = article.category;
             row['sentimentality'] = article.sentimentality;
