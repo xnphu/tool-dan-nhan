@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require("request");
 
 const app = express();
 
@@ -10,183 +11,78 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
 });
 
-app.get('/data', (req, res) => {
-    var data = [
+app.get('/data', async (req, res) => {
+    var options = {
+        method: 'GET',
+        url: 'http://bangtin_xuhuong_api.ngrok.io/v1/data',
+        headers:
         {
-            "DT_RowId": "row_1",
-            "stt": "1",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_2",
-            "stt": "2",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_3",
-            "stt": "3",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_4",
-            "stt": "4",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_5",
-            "stt": "5",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_6",
-            "stt": "6",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tiêu cực"
-        }, {
-            "DT_RowId": "row_7",
-            "stt": "7",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Trung tính"
-        }, {
-            "DT_RowId": "row_8",
-            "stt": "8",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Trung tính"
-        }, {
-            "DT_RowId": "row_9",
-            "stt": "9",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tiêu cực"
-        }, {
-            "DT_RowId": "row_10",
-            "stt": "10",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_11",
-            "stt": "11",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tích cực"
-        }, {
-            "DT_RowId": "row_12",
-            "stt": "12",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Tiêu cực"
-        }, {
-            "DT_RowId": "row_13",
-            "stt": "13",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Trung tính"
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjU4ODc0NzUsImV4cCI6MTY1MjI4NzQ4MCwic3ViIjoidGhlb2RvaWJhb2NoaSJ9.M9I01fkn-Qu34UTR-9UkMIGC-QSG201T7Hcz4AQmR74',
+            'Content-Type': 'application/json'
         },
-        {
-            "DT_RowId": "row_14",
-            "stt": "14",
-            "title": "\'No Control Air\'Cotton cardigan",
-            "newspaper": "4800.00",
-            "category": "1",
-            "publish_date": "2014-03-13 04:17:16",
-            "update_time": "17",
-            "quality": "Trung tính"
-        }
-    ]
-    res.send(data);
-});
+        body: { timeframe: '172000' },
+        json: true
+    };
 
-app.put('/table', (req, res) => {
-    var data = [
-        {
-            "DT_RowId": "row_3",
-            "quality": "3"
-        },
-        {
-            "DT_RowId": "row_1",
-            "quality": "1"
-        }, 
-        {
-            "DT_RowId": "row_2",
-            "quality": "2"
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        data = []
+        for (var index = 0; index < body.length; index++) {
+            article = body[index]
+            row = {};
+            row['DT_RowId'] = article.id;
+            row['title'] = article.title;
+            row['newspaper'] = article.newspaper;
+            row['category'] = article.category;
+            row['sentimentality'] = article.sentimentality;
+            row['id'] = article.id;
+            data.push(row);
         }
-    ]
-    if (req) {
-        var id = '';
-        var new_quality_value = '';
-        for (var key in req.body.data) {
-            id = key;
-            new_quality_value = req.body.data[key]['quality'];
-            break;
-            //console.log(key, req.body.data[key]);
-        }
-        console.log(id);
-        console.log(new_quality_value);
+        res.send(data);
+    });
 
-        for (var key2 in data) {
-            if (data[key2]['DT_RowId']==id) {
-                data[key2]['quality'] = new_quality_value;
-                break;
-            };
-        }
-        console.log(data)
-        res.json({success: "ok"})
-        //To do: goi api de update du lieu
-        // console.log(req.body.data)
+})
+
+app.put('/table', async (req, res) => {
+    var id = '';
+    var new_sentimentality_value = '';
+    for (var key in req.body.data) {
+        id = key;
+        new_sentimentality_value = req.body.data[key]['sentimentality'];
     }
+    console.log(id);
+    console.log(new_sentimentality_value);
+
+    var putOptions = {
+        method: 'POST',
+        url: 'http://bangtin_xuhuong_api.ngrok.io/v1/data',
+        headers:
+        {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NjU4ODc0NzUsImV4cCI6MTY1MjI4NzQ4MCwic3ViIjoidGhlb2RvaWJhb2NoaSJ9.M9I01fkn-Qu34UTR-9UkMIGC-QSG201T7Hcz4AQmR74',
+            'Postman-Token': 'c2974346-60e9-4c2e-941e-2c01a5327583',
+            'cache-control': 'no-cache',
+            'Content-Type': 'application/json'
+        },
+        body: { id: id, sentimentality: new_sentimentality_value },
+        json: true
+    };
+
+    request(putOptions, function (error, response, putBody) {
+        if (error) throw new Error(error);
+        else {
+            console.log(putBody);
+            console.log(req.body.data); 
+            res.json({"data": [{"DT_RowId": key, "sentimentality": new_sentimentality_value}] });
+        }
+
+    }); 
+    //To do: goi api de update du lieu
+    // console.log(req.body.data)
 })
 
 app.use(express.static('public'));
 
 app.listen(8080, (err) => {
-    if(err) console.log(err)
+    if (err) console.log(err)
     else console.log('Server is listening at port 8080');
 });

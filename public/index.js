@@ -7,7 +7,6 @@ $(document).ready(function () {
             create_article_table(data);
         }
     })
-    
 })
 
 function create_article_table(article_list) {
@@ -20,8 +19,8 @@ function create_article_table(article_list) {
         },
         table: "#article_table",
         fields: [{
-            label: "Chất lượng:",
-            name: "quality",
+            label: "Sắc thái:",
+            name: "sentimentality",
             type: "select",
             options: [
                 { label: "Tích cực", value: 'positive' },
@@ -32,7 +31,7 @@ function create_article_table(article_list) {
     });
 
     $('#article_table').on('click', 'tbody td:not(:first-child)', function (event) {
-        editor.inline(this);
+        // editor.inline(this);
     });
 
     $('#article_table').DataTable({
@@ -41,17 +40,20 @@ function create_article_table(article_list) {
         dom: "Bfrtip",
         data: dataset,
         columns: [
-            { title: "STT", data: "stt", "searchable": false, className: "min-desktop" },
+            {
+                data: null,
+                defaultContent: '',
+                className: 'select-checkbox',
+                orderable: false
+            },
             { title: "Tên bài", data: "title", "searchable": true, className: "all" },
             { title: "Nguồn báo", data: "newspaper", "searchable": false, className: "min-desktop" },
             { title: "Chủ đề", data: "category", "searchable": false, className: "min-desktop" },
-            { title: "Ngày xuất bản", data: "publish_date", "searchable": false, className: "min-desktop" },
-            { title: "Cập nhật", data: "update_time", "searchable": false, className: "min-desktop" },
-            { title: "Chất lượng", data: "quality", "searchable": false, className: "min-desktop" }
+            { title: "Sắc thái", data: "sentimentality", "searchable": false, className: "min-desktop" }
         ],
         "rowCallback": function (row, data, index) {
-            topic = $('td:eq(1)', row).html();
-            $('td:eq(1)', row).html('<a href="' + data.href + '" target="_blank">' + topic + '</a>');
+            topic = $('td:eq(0)', row).html();
+            $('td:eq(0)', row).html('<a href="' + data.href + '" target="_blank">' + topic + '</a>');
             // sentimentality = $('td:eq(6)', row).html();
             // $('td:eq(6)', row).html('<select value="' + data.quality + '"> <option value="positive"> Tích cực </option> <option value="negative"> Tiêu cực </option> <option value="neutral"> Trung tính </option></select>');
         },
@@ -68,9 +70,9 @@ function create_article_table(article_list) {
             { responsivePriority: 2, targets: 2 }
         ],
         nowrap: false,
-        "pageLength": 10,
-        paging: true,
+        "pageLength": 100,
+        paging: false,
+        "bSort": false
     });
-    
 }
 
