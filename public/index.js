@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "http://localhost:8080/data",
+        url: "/data",
         type: "GET",
         success: function(data) {
             console.log(data)
@@ -15,7 +15,7 @@ function create_article_table(article_list) {
     var editor = new $.fn.dataTable.Editor({
         ajax: {
             type: "PUT",
-            url:"http://localhost:8080/table"
+            url:"/table"
         },
         table: "#article_table",
         fields: [{
