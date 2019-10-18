@@ -71,8 +71,8 @@ function create_article_table(article_list) {
             { responsivePriority: 2, targets: 2 }
         ],
         nowrap: false,
-        "pageLength": 100,
-        paging: false,
+        "pageLength": 15,
+        paging: true,
         "bSort": false
     });
 }
