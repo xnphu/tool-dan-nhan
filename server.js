@@ -37,11 +37,19 @@ app.get('/data', async (req, res) => {
             row['category'] = article.category;
             row['sentimentality'] = article.sentimentality;
             row['id'] = article.id;
+            if (article.labeled == 1) {
+                row['labeled'] = 'Đã dán nhãn';
+            }
+            else if (article.labeled == 0) {
+                row['labeled'] = 'Chưa dán nhãn';
+            }
+            else if (article.labeled == null) {
+                row['labeled'] = 'Chưa dán nhãn';
+            }
             data.push(row);
         }
         res.send(data);
     });
-
 })
 
 app.put('/table', async (req, res) => {
@@ -67,18 +75,15 @@ app.put('/table', async (req, res) => {
         body: { id: id, sentimentality: new_sentimentality_value },
         json: true
     };
-
+    
     request(putOptions, function (error, response, putBody) {
         if (error) throw new Error(error);
         else {
             console.log(putBody);
-            console.log(req.body.data); 
-            res.json({"data": [{"DT_RowId": key, "sentimentality": new_sentimentality_value}] });
+            console.log(req.body.data);
+            res.json({ "data": [{ "DT_RowId": key, "sentimentality": new_sentimentality_value, "labeled": "Đã dán nhãn" }] });
         }
-
-    }); 
-    //To do: goi api de update du lieu
-    // console.log(req.body.data)
+    });
 })
 
 app.use(express.static('public'));

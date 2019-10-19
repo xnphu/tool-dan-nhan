@@ -50,7 +50,8 @@ function create_article_table(article_list) {
             { title: "Link", data: "href", "searchable": false, className: "all" },
             { title: "Nguồn báo", data: "newspaper", "searchable": false, className: "min-desktop" },
             { title: "Chủ đề", data: "category", "searchable": false, className: "min-desktop" },
-            { title: "Sắc thái", data: "sentimentality", "searchable": false, className: "min-desktop" }
+            { title: "Sắc thái", data: "sentimentality", "searchable": false, className: "min-desktop" },
+            { title: "Labeled", data: "labeled", "searchable": false, className: "min-desktop" }
         ],
         "rowCallback": function (row, data, index) {
             topic = $('td:eq(2)', row).html();
