@@ -31,7 +31,7 @@ function create_article_table(article_list) {
     });
 
     $('#article_table').on('click', 'tbody td:not(:first-child)', function (event) {
-        // editor.inline(this);
+        editor.bubble(this);
     });
 
     $('#article_table').DataTable({
@@ -56,12 +56,10 @@ function create_article_table(article_list) {
         "rowCallback": function (row, data, index) {
             topic = $('td:eq(2)', row).html();
             $('td:eq(2)', row).html('<a href="' + data.href + '" target="_blank">' + topic + '</a>');
-            // sentimentality = $('td:eq(6)', row).html();
-            // $('td:eq(6)', row).html('<select value="' + data.quality + '"> <option value="positive"> Tích cực </option> <option value="negative"> Tiêu cực </option> <option value="neutral"> Trung tính </option></select>');
         },
         select: {
             style:    'os',
-            selector: 'td:first-child'
+            selector: 'td'
         },
         buttons: [
             { extend: "edit",   editor: editor }
